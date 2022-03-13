@@ -2,23 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createServer, Model } from 'miragejs'
 import { App } from './App'
-import schema from 'miragejs/orm/schema'
 
 createServer({
   models: {
-    transition: Model
+    transaction: Model
   },
 
   seeds(server) {
+    // pré cadastrando itens no banco de dados (apenas para ficar masi amigavel )
     server.db.loadData({
-      transitions: [
+      transactions: [
         {
           id: 1,
           title: 'Desenvolvimento de app',
           type: 'deposit',
           category: 'Desenvolvimento',
           amount: 7000,
-          createAt: new Date('2022-01-30 12:30:15')
+          createAt: new Date('2022-01-31 12:30:20')
         },
         {
           id: 2,
@@ -36,13 +36,13 @@ createServer({
     this.namespace = 'api'
 
     this.get('/transactions', () => {
-      return this.schema.all('transition')
+      return this.schema.all('transaction')
     })
 
     this.post('/transactions', (schema, request) => {
       const data = JSON.parse(request.requestBody)
 
-      return schema.create('transition', data)
+      return schema.create('transaction', data)
     })
   }
 })
